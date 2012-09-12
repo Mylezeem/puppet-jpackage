@@ -18,7 +18,7 @@ class jpackage {
       descr          => 'JPackage (free), generic',
       mirrorlist     => 'http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=5.0',
       failovermethod => 'priority',
-      gpgcheck       => 1
+      gpgcheck       => 1,
       gpgkey         => 'http://www.jpackage.org/jpackage.asc',
       enabled        => 1,
     }
@@ -27,7 +27,7 @@ class jpackage {
       descr          => "JPackage (free) for Fedora Core ${::os_maj_version}",
       mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=fedora-${::os_maj_version}&type=free&release=5.0",
       failovermethod => 'priority',
-      gpgcheck       => 1
+      gpgcheck       => 1,
       gpgkey         => 'http://www.jpackage.org/jpackage.asc',
       enabled        => 0,
     }
@@ -36,7 +36,7 @@ class jpackage {
       descr          => "JPackage (free) for Red Hat Enterprise Linux ${::os_maj_version}",
       mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=redhat-el-${::os_maj_version}&type=free&release=5.0",
       failovermethod => 'priority',
-      gpgcheck       => 1
+      gpgcheck       => 1,
       gpgkey         => 'http://www.jpackage.org/jpackage.asc',
       enabled        => 0,
     }
@@ -45,7 +45,7 @@ class jpackage {
       descr          => 'JPackage (non-free) generic',
       mirrorlist     => "http://www.jpackage.org/jpackage_Generic_nonfree_5.0.txt",
       failovermethod => 'priority',
-      gpgcheck       => 1
+      gpgcheck       => 1,
       gpgkey         => 'http://www.jpackage.org/jpackage.asc',
       enabled        => 0,
     }
@@ -56,7 +56,7 @@ class jpackage {
       descr          => 'JPackage (free), generic',
       mirrorlist     => 'http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=5.0-updates',
       failovermethod => 'priority',
-      gpgcheck       => 1
+      gpgcheck       => 1,
       gpgkey         => 'http://www.jpackage.org/jpackage.asc',
       enabled        => 1,
     }
@@ -65,7 +65,7 @@ class jpackage {
       descr          => "JPackage (free) for Fedora Core ${::os_maj_version}",
       mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=fedora-${::os_maj_version}&type=free&release=5.0-updates",
       failovermethod => 'priority',
-      gpgcheck       => 1
+      gpgcheck       => 1,
       gpgkey         => 'http://www.jpackage.org/jpackage.asc',
       enabled        => 0,
     }
@@ -74,7 +74,7 @@ class jpackage {
       descr          => "JPackage (free) for Red Hat Enterprise Linux ${::os_maj_version}",
       mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=redhat-el-${::os_maj_version}&type=free&release=5.0-updates",
       failovermethod => 'priority',
-      gpgcheck       => 1
+      gpgcheck       => 1,
       gpgkey         => 'http://www.jpackage.org/jpackage.asc',
       enabled        => 0,
     }
@@ -83,7 +83,7 @@ class jpackage {
       descr          => 'JPackage (non-free) generic',
       mirrorlist     => "http://www.jpackage.org/jpackage_Generic_nonfree_5.0-updates.txt",
       failovermethod => 'priority',
-      gpgcheck       => 1
+      gpgcheck       => 1,
       gpgkey         => 'http://www.jpackage.org/jpackage.asc',
       enabled        => 0,
     }
