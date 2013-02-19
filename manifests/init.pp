@@ -26,63 +26,60 @@ class jpackage($version = '6.0') {
 
   if $::osfamily == 'RedHat' {
 
-    case $::operatingsystem {
+    case $version {
 
-      'Fedora' : {
-        yumrepo {'jpackage-fc':
-          descr          => "JPackage (free) for Fedora Core ${::os_maj_version}",
-          mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=fedora-${::os_maj_version}&type=free&release=${version}",
-          failovermethod => 'priority',
-          gpgcheck       => 1,
-          gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-          enabled        => 0,
-        }
-      }
-
-      'RedHat' : {
-        yumrepo {'jpackage-rhel':
-          descr          => "JPackage (free) for Red Hat Enterprise Linux ${::os_maj_version}",
-          mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=redhat-el-${::os_maj_version}&type=free&release=${version}",
-          failovermethod => 'priority',
-          gpgcheck       => 1,
-          gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-          enabled        => 0,
-        }
-      }
-
-      default : {
-        yumrepo {'jpackage-generic':
-          descr          => 'JPackage (free), generic',
-          mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=${version}",
-          failovermethod => 'priority',
-          gpgcheck       => 1,
-          gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-          enabled        => 1,
-        }
-      }
-
-    }
-
-    # Updates
-    #
-    # JPacakge 6.0 does not provide updates repositories yet
-    #
-    if $version == '5.0' {
-
-      case $::operatingsystem {
-
-        'Fedora' : {
-          yumrepo {'jpackage-fc-updates':
+      '6.0' : {
+        if $::operatingsystem == 'Fedora' and $::os_maj_version >= 9 and $::os_maj_version <= 17 {
+          yumrepo {'jpackage-fc':
             descr          => "JPackage (free) for Fedora Core ${::os_maj_version}",
-            mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=fedora-${::os_maj_version}&type=free&release=${version}-updates",
+            mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=fedora-${::os_maj_version}&type=free&release=${version}",
             failovermethod => 'priority',
             gpgcheck       => 1,
             gpgkey         => 'http://www.jpackage.org/jpackage.asc',
             enabled        => 0,
           }
         }
-
-        'RedHat' : {
+        else {
+          yumrepo {'jpackage-generic':
+            descr          => 'JPackage (free), generic',
+            mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=${version}",
+            failovermethod => 'priority',
+            gpgcheck       => 1,
+            gpgkey         => 'http://www.jpackage.org/jpackage.asc',
+            enabled        => 1,
+          }
+        }
+      }
+      '5.0' : {
+        if $::operatingsystem == 'Fedora' and $::os_maj_version >= 7 and $::os_maj_version <= 14 {
+          yumrepo {'jpackage-fc':
+            descr          => "JPackage (free) for Fedora Core ${::os_maj_version}",
+            mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=fedora-${::os_maj_version}&type=free&release=${version}",
+            failovermethod => 'priority',
+            gpgcheck       => 1,
+            gpgkey         => 'http://www.jpackage.org/jpackage.asc',
+            enabled        => 0,
+          }
+          if $::os_maj_version >= 7 and $::os_maj_version <= 12 {
+            yumrepo {'jpackage-fc-updates':
+              descr          => "JPackage (free) for Fedora Core ${::os_maj_version}",
+              mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=fedora-${::os_maj_version}&type=free&release=${version}-updates",
+              failovermethod => 'priority',
+              gpgcheck       => 1,
+              gpgkey         => 'http://www.jpackage.org/jpackage.asc',
+              enabled        => 0,
+            }
+          }
+        }
+        elsif $::operatingsystem == 'RedHat' and ($::os_maj_version == 4 or $::os_maj_version == 5) {
+          yumrepo {'jpackage-rhel':
+            descr          => "JPackage (free) for RedHat Entreprise Linux  ${::os_maj_version}",
+            mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=redhat-el-${::os_maj_version}&type=free&release=${version}",
+            failovermethod => 'priority',
+            gpgcheck       => 1,
+            gpgkey         => 'http://www.jpackage.org/jpackage.asc',
+            enabled        => 0,
+          }
           yumrepo {'jpackage-rhel-updates':
             descr          => "JPackage (free) for Red Hat Enterprise Linux ${::os_maj_version}",
             mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=redhat-el-${::os_maj_version}&type=free&release=${version}-updates",
@@ -92,8 +89,15 @@ class jpackage($version = '6.0') {
             enabled        => 0,
           }
         }
-
-        default : {
+        else {
+          yumrepo {'jpackage-generic':
+            descr          => 'JPackage (free), generic',
+            mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=${version}",
+            failovermethod => 'priority',
+            gpgcheck       => 1,
+            gpgkey         => 'http://www.jpackage.org/jpackage.asc',
+            enabled        => 1,
+          }
           yumrepo {'jpackage-generic-updates':
             descr          => 'JPackage (free), generic',
             mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=${version}-updates",
@@ -103,13 +107,14 @@ class jpackage($version = '6.0') {
             enabled        => 1,
           }
         }
-
       }
-
+      default : {
+        fail("${version} version of JPackage is not handles")
+      }
     }
-    } else {
-      notice ("Your operating system ${::operatingsystem} will not have the JPackage repository applied")
-    }
+  } else {
+      fail ("Your operating system ${::operatingsystem} will not have the JPackage repository applied")
+  }
 
 }
 
