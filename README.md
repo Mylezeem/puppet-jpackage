@@ -1,7 +1,7 @@
 puppet-jpackage
 ===============
 
-A Puppet module that ensures the jpackage repos are installed
+A Puppet module that ensures the jpackage repositories are installed
 
 # About
 
@@ -15,7 +15,15 @@ jpackage is a module that ensures the jpackages repos are correctly installed on
 
 # Usage
 
-`include jpackage`
+For the latest version :
+
+    include jpackage
+
+For a specific version : 
+
+    class {'jpackage':
+      version => '5.0',
+    }
 
 # Links
 

@@ -4,19 +4,31 @@
 #
 # Parameters:
 #
+#    [*version*] : Version of jpackage that will be installed
+#
 # Actions:
 #
 # Requires:
 #
 # Sample Usage:
-#  include jpackage
-class jpackage {
+#
+#  For the latest version
+#
+#     include jpackage
+#
+#  For a specific version
+#
+#     class {'jpackage' :
+#         version => '5.0',
+#    }
+#
+class jpackage($version = '6.0') {
 
   if $::osfamily == 'RedHat' {
 
     yumrepo {'jpackage-generic':
       descr          => 'JPackage (free), generic',
-      mirrorlist     => 'http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=5.0',
+      mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=${version}",
       failovermethod => 'priority',
       gpgcheck       => 1,
       gpgkey         => 'http://www.jpackage.org/jpackage.asc',
@@ -25,7 +37,7 @@ class jpackage {
 
     yumrepo {'jpackage-fc':
       descr          => "JPackage (free) for Fedora Core ${::os_maj_version}",
-      mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=fedora-${::os_maj_version}&type=free&release=5.0",
+      mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=fedora-${::os_maj_version}&type=free&release=${version}",
       failovermethod => 'priority',
       gpgcheck       => 1,
       gpgkey         => 'http://www.jpackage.org/jpackage.asc',
@@ -34,16 +46,7 @@ class jpackage {
 
     yumrepo {'jpackage-rhel':
       descr          => "JPackage (free) for Red Hat Enterprise Linux ${::os_maj_version}",
-      mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=redhat-el-${::os_maj_version}&type=free&release=5.0",
-      failovermethod => 'priority',
-      gpgcheck       => 1,
-      gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-      enabled        => 0,
-    }
-
-    yumrepo {'jpackage-generic-nonfree':
-      descr          => 'JPackage (non-free) generic',
-      mirrorlist     => "http://www.jpackage.org/jpackage_Generic_nonfree_5.0.txt",
+      mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=redhat-el-${::os_maj_version}&type=free&release=${version}",
       failovermethod => 'priority',
       gpgcheck       => 1,
       gpgkey         => 'http://www.jpackage.org/jpackage.asc',
@@ -54,7 +57,7 @@ class jpackage {
 
     yumrepo {'jpackage-generic-updates':
       descr          => 'JPackage (free), generic',
-      mirrorlist     => 'http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=5.0-updates',
+      mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=${version}-updates",
       failovermethod => 'priority',
       gpgcheck       => 1,
       gpgkey         => 'http://www.jpackage.org/jpackage.asc',
@@ -63,7 +66,7 @@ class jpackage {
 
     yumrepo {'jpackage-fc-updates':
       descr          => "JPackage (free) for Fedora Core ${::os_maj_version}",
-      mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=fedora-${::os_maj_version}&type=free&release=5.0-updates",
+      mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=fedora-${::os_maj_version}&type=free&release=${version}-updates",
       failovermethod => 'priority',
       gpgcheck       => 1,
       gpgkey         => 'http://www.jpackage.org/jpackage.asc',
@@ -72,16 +75,7 @@ class jpackage {
 
     yumrepo {'jpackage-rhel-updates':
       descr          => "JPackage (free) for Red Hat Enterprise Linux ${::os_maj_version}",
-      mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=redhat-el-${::os_maj_version}&type=free&release=5.0-updates",
-      failovermethod => 'priority',
-      gpgcheck       => 1,
-      gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-      enabled        => 0,
-    }
-
-    yumrepo {'jpackage-generic-nonfree-updates':
-      descr          => 'JPackage (non-free) generic',
-      mirrorlist     => "http://www.jpackage.org/jpackage_Generic_nonfree_5.0-updates.txt",
+      mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=redhat-el-${::os_maj_version}&type=free&release=${version}-updates",
       failovermethod => 'priority',
       gpgcheck       => 1,
       gpgkey         => 'http://www.jpackage.org/jpackage.asc',

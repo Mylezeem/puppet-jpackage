@@ -1,5 +1,5 @@
 name 'yguenane-jpackage'
-version '0.0.1'
+version '0.0.2'
 summary 'A Puppet module that ensures jpackage repos are installed'
 description "This module ensures that jpackage repos are installed"
 license 'GPLv3'
