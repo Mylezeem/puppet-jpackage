@@ -1,4 +1,4 @@
-puppet-jpackage
+puppet-jpackage [![Build Status](https://travis-ci.org/Spredzy/puppet-jpackage.png)](https://travis-ci.org/Spredzy/puppet-jpackage)
 ===============
 
 A Puppet module that ensures the jpackage repositories are installed

@@ -1,0 +1,6 @@
+2013-02-19  Yanis Guenane  <yguenane@gmail.com> - 0.1.0
+
+  * Create a test suite
+  * Impose strict matching for repository installation based on facters
+  * Activate the version choice of jpackage installation
+  * Default to jpackage 6.0 repositories
