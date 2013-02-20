@@ -14,6 +14,18 @@ describe 'jpackage' do
       {:osfamily => 'RedHat'}
     end
 
+    it 'install jpackage-generic (enabled)' do
+      should contain_yumrepo('jpackage-generic').with({
+        'mirrorlist' => 'http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=6.0',
+        'enabled'    => 1,
+        'gpgcheck'   => 1,
+        'gpgkey'     => 'http://www.jpackage.org/jpackage.asc',
+      })
+    end
+
+    it 'does not install jpackage-generic-updates' do
+      should_not contain_yumrepo('jpackage-generic-updates')
+    end
 
     context 'when Fedora BETWEEN 9 AND 17' do
 
@@ -116,6 +128,24 @@ describe 'jpackage' do
 
     let(:facts) do
       {:osfamily => 'RedHat'}
+    end
+
+    it 'install jpackage-generic (enabled)' do
+      should contain_yumrepo('jpackage-generic').with({
+        'mirrorlist' => 'http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=5.0',
+        'enabled'    => 1,
+        'gpgcheck'   => 1,
+        'gpgkey'     => 'http://www.jpackage.org/jpackage.asc',
+      })
+    end
+
+    it 'install jpackage-generic-updates (enabled)' do
+      should contain_yumrepo('jpackage-generic-updates').with({
+        'mirrorlist' => 'http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=5.0-updates',
+        'enabled'    => 1,
+        'gpgcheck'   => 1,
+        'gpgkey'     => 'http://www.jpackage.org/jpackage.asc',
+      })
     end
 
 
