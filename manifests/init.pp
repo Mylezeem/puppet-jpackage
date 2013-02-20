@@ -29,6 +29,14 @@ class jpackage($version = '6.0') {
     case $version {
 
       '6.0' : {
+        yumrepo {'jpackage-generic':
+          descr          => 'JPackage (free), generic',
+          mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=${version}",
+          failovermethod => 'priority',
+          gpgcheck       => 1,
+          gpgkey         => 'http://www.jpackage.org/jpackage.asc',
+          enabled        => 1,
+        }
         if $::operatingsystem == 'Fedora' and $::os_maj_version >= 9 and $::os_maj_version <= 17 {
           yumrepo {'jpackage-fc':
             descr          => "JPackage (free) for Fedora Core ${::os_maj_version}",
@@ -39,18 +47,24 @@ class jpackage($version = '6.0') {
             enabled        => 0,
           }
         }
-        else {
-          yumrepo {'jpackage-generic':
-            descr          => 'JPackage (free), generic',
-            mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=${version}",
-            failovermethod => 'priority',
-            gpgcheck       => 1,
-            gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-            enabled        => 1,
-          }
-        }
       }
       '5.0' : {
+        yumrepo {'jpackage-generic':
+          descr          => 'JPackage (free), generic',
+          mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=${version}",
+          failovermethod => 'priority',
+          gpgcheck       => 1,
+          gpgkey         => 'http://www.jpackage.org/jpackage.asc',
+          enabled        => 1,
+        }
+        yumrepo {'jpackage-generic-updates':
+          descr          => 'JPackage (free), generic',
+          mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=${version}-updates",
+          failovermethod => 'priority',
+          gpgcheck       => 1,
+          gpgkey         => 'http://www.jpackage.org/jpackage.asc',
+          enabled        => 1,
+        }
         if $::operatingsystem == 'Fedora' and $::os_maj_version >= 7 and $::os_maj_version <= 14 {
           yumrepo {'jpackage-fc':
             descr          => "JPackage (free) for Fedora Core ${::os_maj_version}",
@@ -89,32 +103,14 @@ class jpackage($version = '6.0') {
             enabled        => 0,
           }
         }
-        else {
-          yumrepo {'jpackage-generic':
-            descr          => 'JPackage (free), generic',
-            mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=${version}",
-            failovermethod => 'priority',
-            gpgcheck       => 1,
-            gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-            enabled        => 1,
-          }
-          yumrepo {'jpackage-generic-updates':
-            descr          => 'JPackage (free), generic',
-            mirrorlist     => "http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=${version}-updates",
-            failovermethod => 'priority',
-            gpgcheck       => 1,
-            gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-            enabled        => 1,
-          }
-        }
       }
       default : {
         fail("${version} version of JPackage is not handles")
       }
     }
-  } else {
+    } else {
       fail ("Your operating system ${::operatingsystem} will not have the JPackage repository applied")
-  }
+    }
 
 }
 
