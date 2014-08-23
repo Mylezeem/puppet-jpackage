@@ -38,7 +38,7 @@ describe 'jpackage' do
       it 'install jpackage-fc (disabled)' do
         should contain_yumrepo('jpackage-fc').with({
           'mirrorlist' => 'http://www.jpackage.org/mirrorlist.php?dist=fedora-17&type=free&release=6.0',
-          'enabled'    => 0,
+          'enabled'    => 1,
           'gpgcheck'   => 1,
           'gpgkey'     => 'http://www.jpackage.org/jpackage.asc',
         })
@@ -160,7 +160,7 @@ describe 'jpackage' do
       it 'install jpackage-fc (disabled)' do
         should contain_yumrepo('jpackage-fc').with({
           'mirrorlist' => 'http://www.jpackage.org/mirrorlist.php?dist=fedora-12&type=free&release=5.0',
-          'enabled'    => 0,
+          'enabled'    => 1,
           'gpgcheck'   => 1,
           'gpgkey'     => 'http://www.jpackage.org/jpackage.asc',
         })
@@ -169,7 +169,7 @@ describe 'jpackage' do
       it 'install jpackage-fc-updates (disabled)' do
         should contain_yumrepo('jpackage-fc-updates').with({
           'mirrorlist' => 'http://www.jpackage.org/mirrorlist.php?dist=fedora-12&type=free&release=5.0-updates',
-          'enabled'    => 0,
+          'enabled'    => 1,
           'gpgcheck'   => 1,
           'gpgkey'     => 'http://www.jpackage.org/jpackage.asc',
         })
@@ -215,7 +215,7 @@ describe 'jpackage' do
       it 'install jpackage-rhel (disabled)' do
         should contain_yumrepo('jpackage-rhel').with({
           'mirrorlist' => 'http://www.jpackage.org/mirrorlist.php?dist=redhat-el-5&type=free&release=5.0',
-          'enabled'    => 0,
+          'enabled'    => 1,
           'gpgcheck'   => 1,
           'gpgkey'     => 'http://www.jpackage.org/jpackage.asc',
         })
@@ -224,7 +224,7 @@ describe 'jpackage' do
       it 'install jpackage-rhel-updates (disabled)' do
         should contain_yumrepo('jpackage-rhel-updates').with({
           'mirrorlist' => 'http://www.jpackage.org/mirrorlist.php?dist=redhat-el-5&type=free&release=5.0-updates',
-          'enabled'    => 0,
+          'enabled'    => 1,
           'gpgcheck'   => 1,
           'gpgkey'     => 'http://www.jpackage.org/jpackage.asc',
         })

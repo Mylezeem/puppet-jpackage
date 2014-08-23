@@ -1,14 +1,19 @@
 # Class: jpackage
 #
-#  This class ensures jpackage repos are installed
+#  This class ensures jpackage repositories are installed
 #
 # Parameters:
 #
-#    [*version*] : Version of jpackage that will be installed
+#  [*version*]
+#    Version of jpackage that will be installed
 #
-# Actions:
+#  [*repo_enable*]
+#    (Boolean) Whether or not the main repository should be enabled
+#    Default: true
 #
-# Requires:
+#  [*update_enable*]
+#    (Boolean) Whether or not the update repository should be enabled
+#    Default: true
 #
 # Sample Usage:
 #
@@ -22,7 +27,13 @@
 #         version => '5.0',
 #    }
 #
-class jpackage($version = '6.0') {
+class jpackage(
+  $version       = '6.0',
+  $repo_enable   = true,
+  $update_enable = true,
+) {
+
+  include ::stdlib
 
   if $::osfamily == 'RedHat' {
 
@@ -35,7 +46,7 @@ class jpackage($version = '6.0') {
           failovermethod => 'priority',
           gpgcheck       => 1,
           gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-          enabled        => 1,
+          enabled        => bool2num($repo_enable),
         }
         if $::operatingsystem == 'Fedora' and $::os_maj_version >= 9 and $::os_maj_version <= 17 {
           yumrepo {'jpackage-fc':
@@ -44,7 +55,7 @@ class jpackage($version = '6.0') {
             failovermethod => 'priority',
             gpgcheck       => 1,
             gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-            enabled        => 0,
+            enabled        => bool2num($update_enable),
           }
         }
       }
@@ -55,7 +66,7 @@ class jpackage($version = '6.0') {
           failovermethod => 'priority',
           gpgcheck       => 1,
           gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-          enabled        => 1,
+          enabled        => bool2num($repo_enable),
         }
         yumrepo {'jpackage-generic-updates':
           descr          => 'JPackage (free), generic',
@@ -63,7 +74,7 @@ class jpackage($version = '6.0') {
           failovermethod => 'priority',
           gpgcheck       => 1,
           gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-          enabled        => 1,
+          enabled        => bool2num($update_enable),
         }
         if $::operatingsystem == 'Fedora' and $::os_maj_version >= 7 and $::os_maj_version <= 14 {
           yumrepo {'jpackage-fc':
@@ -72,7 +83,7 @@ class jpackage($version = '6.0') {
             failovermethod => 'priority',
             gpgcheck       => 1,
             gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-            enabled        => 0,
+            enabled        => bool2num($repo_enable),
           }
           if $::os_maj_version >= 7 and $::os_maj_version <= 12 {
             yumrepo {'jpackage-fc-updates':
@@ -81,7 +92,7 @@ class jpackage($version = '6.0') {
               failovermethod => 'priority',
               gpgcheck       => 1,
               gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-              enabled        => 0,
+              enabled        => bool2num($update_enable),
             }
           }
         }
@@ -92,7 +103,7 @@ class jpackage($version = '6.0') {
             failovermethod => 'priority',
             gpgcheck       => 1,
             gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-            enabled        => 0,
+            enabled        => bool2num($repo_enable),
           }
           yumrepo {'jpackage-rhel-updates':
             descr          => "JPackage (free) for Red Hat Enterprise Linux ${::os_maj_version}",
@@ -100,12 +111,12 @@ class jpackage($version = '6.0') {
             failovermethod => 'priority',
             gpgcheck       => 1,
             gpgkey         => 'http://www.jpackage.org/jpackage.asc',
-            enabled        => 0,
+            enabled        => bool2num($update_enable),
           }
         }
       }
       default : {
-        fail("${version} version of JPackage is not handles")
+        fail("${version} version of JPackage is not handled")
       }
     }
     } else {
@@ -113,4 +124,3 @@ class jpackage($version = '6.0') {
     }
 
 }
-

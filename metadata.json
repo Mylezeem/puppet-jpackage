@@ -1,0 +1,48 @@
+{
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "5",
+        "6"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "5",
+        "6"
+      ]
+    },
+    {
+      "operatingsystem": "Fedora",
+      "operatingsystemrelease": [
+        "17"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": "2.7.x"
+    }
+  ],
+  "name": "yguenane-jpackage",
+  "version": "0.1.1",
+  "author": "Yanis Guenane <yguenane@gmail.com>",
+  "summary": "A Puppet that ensures the jpackage repos are installed",
+  "license": "Apache 2.0",
+  "source": "https://github.com/Mylezeem/puppet-jpackage",
+  "project_page": "https://github.com/Mylezeem/puppet-jpackage",
+  "issues_url": "https://github.com/Mylezeem/puppet-jpackage/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_range": ">= 4.3.2"
+    }
+  ]
+}

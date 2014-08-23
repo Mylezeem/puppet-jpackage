@@ -1,28 +1,63 @@
-puppet-jpackage [![Build Status](https://travis-ci.org/Spredzy/puppet-jpackage.png)](https://travis-ci.org/Spredzy/puppet-jpackage)
-===============
+# puppet-jpackage
 
-A Puppet module that ensures the jpackage repositories are installed
+[![Build Status](https://travis-ci.org/Mylezeem/puppet-jpackage.png)](https://travis-ci.org/Mylezeem/puppet-jpackage)
 
-# About
 
-jpackage is a module that ensures the jpackages repos are correctly installed on the system.
+## Overview
 
-# Tests
+A Puppet module that ensures the [jpackage](http://www.jpackage.org) repositories are installed.
 
-* CentOS 6.x
-* CentOS 5.x
-* Fedora 17
-* This should work on all RHEL variant
+The JPackage Project has two primary goals:
 
-# Usage
+* To provide a coherent set of Java software packages for Linux, satisfying all quality requirements of other applications.
+* To establish an efficient and robust policy for Java software packaging and installation.
+
+## Usage
 
 For the latest version :
 
-    include jpackage
+```puppet
+include jpackage
+```
 
 For a specific version : 
 
-    class {'jpackage':
-      version => '5.0',
-    }
+```puppet
+class {'jpackage':
+  version => '5.0',
+}
+```
+
+One can decide if repository should be enabled or not :
+
+```puppet
+class {'jpackage':
+  version       => '5.0',
+  repo_enable   => true,
+  update_enable => false,
+}
+```
+
+## Parameters
+
+
+#### `version`
+
+Version of jpackage that will be installed
+
+#### `repo_enable`
+
+Whether or not the main repository should be enabled
+
+#### `update_enable`
+
+Whether or not the update repository should be enabled
+
+## Limitations
+
+This module works for :
+
+* EL 6
+* EL 5
+* Fedora 17
 
